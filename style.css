@@ -51,6 +51,11 @@ body {
 
 .card {
     margin: 14px;
+    cursor: move;
+}
+
+.card.dragging {
+    opacity: .5;
 }
 
 .card > img {
