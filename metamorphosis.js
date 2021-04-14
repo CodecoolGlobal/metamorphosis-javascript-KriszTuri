@@ -7,6 +7,11 @@ function initDragAndDrop() {
     //get all elements by tag
     const draggables = document.querySelectorAll('.card');
     const containers = document.querySelectorAll('.card-slot');
+    const deck = document.querySelectorAll('.mixed-cards');
+    const frogCardIDs = ['f1','f2','f3','f4'];
+    const butterflyCardIDs = ['b1','b2','b3','b4'];
+    //const frogSlots = document.querySelectorAll('.frog metamorphosis-container');
+    //const butterflySlots = document.querySelectorAll('.butterfly metamorphosis-container');
 
     //apply event listener to everything in 'draggables' (looping draggables)
     draggables.forEach(draggable => {
@@ -22,9 +27,29 @@ function initDragAndDrop() {
     });
     containers.forEach(container => {
       container.addEventListener('dragover', () => {
-        console.log('drag over')
+        const draggable = document.querySelector('.dragging')
+        const elementID = draggable.id.toString()
+        parent = container.parentNode
+        containerMainclassName = parent.parentNode.className
+        if (containerMainclassName == "frog metamorphosis-container"){
+          if (frogCardIDs.indexOf(elementID) > -1){
+            container.appendChild(draggable)
+          }
+        }
+        if (containerMainclassName == "butterfly metamorphosis-container"){
+          if (butterflyCardIDs.indexOf(elementID) > -1){
+            container.appendChild(draggable)
+          }
+        }
       })
-    })
+    });
+
+    deck.forEach(deckOfCards => {
+      deckOfCards.addEventListener('dragover',() => {
+        const draggable = document.querySelector('.dragging')
+        deckOfCards.appendChild(draggable)
+      })
+    });
 }
 
 function shuffleCards() {
